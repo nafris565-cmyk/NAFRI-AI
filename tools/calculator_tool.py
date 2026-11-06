@@ -1,6 +1,12 @@
-def calculate(expression: str):
+def calculate(expression):
     try:
-        result = eval(expression, {"__builtins__": {}})
-        return {"expression": expression, "result": result}
+        expr = expression.strip()
+        expr = expr.replace("calc", "").strip()
+        allowed_chars = "0123456789+-*/().% "
+        for ch in expr:
+            if ch not in allowed_chars:
+                return "Sorry, I can only calculate numbers and + - * /"
+        result = eval(expr, {"__builtins__": {}}, {})
+        return f"Result of {expr} is {result}"
     except Exception as e:
-        return {"expression": expression, "error": str(e)}
+        return f"Calculation Error: {e}"
