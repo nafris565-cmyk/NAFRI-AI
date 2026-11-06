@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAFRI AI - Premium Agent</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{background:#0a0a1a;color:#fff;display:flex;height:100vh;overflow:hidden}
+.sidebar{width:260px;background:#111126;padding:20px;display:flex;flex-direction:column;border-right:1px solid #222}
+.sidebar h2{font-size:22px;background:linear-gradient(90deg,#00ff88,#00aaff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sidebar p{font-size:12px;color:#888;margin:5px 0 20px}
+.new-btn{background:linear-gradient(90deg,#00ff88,#00aaff);color:#000;border:none;padding:12px;border-radius:10px;font-weight:bold;cursor:pointer;margin-bottom:15px}
+.history-item{background:#1a1a35;padding:10px;border-radius:8px;margin-bottom:8px;font-size:13px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.history-item:hover{background:#252550}
+.main{flex:1;display:flex;flex-direction:column}
+.header{padding:15px 25px;border-bottom:1px solid #222;display:flex;justify-content:space-between;align-items:center}
+.header span{background:#00ff88;color:#000;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:bold}
+.chat{flex:1;overflow-y:auto;padding:25px;display:flex;flex-direction:column;gap:15px}
+.msg{max-width:75%;padding:14px 18px;border-radius:18px;line-height:1.6;font-size:15px;white-space:pre-wrap}
+.user{align-self:flex-end;background:linear-gradient(135deg,#00ff88,#00aaff);color:#000;border-bottom-right-radius:5px}
+.ai{align-self:flex-start;background:#1a1a35;border:1px solid #2a2a50;border-bottom-left-radius:5px}
+.ai img{max-width:100%;border-radius:12px;margin-top:10px}
+.quick{display:flex;gap:10px;padding:0 25px 10px;flex-wrap:wrap}
+.quick button{background:#1a1a35;border:1px solid #333;color:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px}
+.quick button:hover{border-color:#00ff88}
+.input-area{padding:15px 25px 20px;display:flex;gap:10px;align-items:center;background:#0a0a1a}
+.input-area input{flex:1;background:#1a1a35;border:1px solid #333;color:#fff;padding:14px 18px;border-radius:25px;outline:none;font-size:15px}
+.input-area input:focus{border-color:#00ff88}
+.upload-btn{background:#1a1a35;border:1px solid #333;color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:20px}
+.send-btn{background:linear-gradient(90deg,#00ff88,#00aaff);border:none;width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:20px}
+</style>
+</head>
+<body>
+<div class="sidebar">
+<h2>NAFRI AI</h2>
+<p>PREMIUM AGENT</p>
+<button class="new-btn" onclick="newChat()">+ New Chat</button>
+<div id="historyList"></div>
+</div>
+<div class="main">
+<div class="header"><div><b>NAFRI AI</b> - Ask Anything</div><span>PREMIUM</span></div>
+<div class="chat" id="chatBox">
+<div class="msg ai">Vanakkam Bro! Naan NAFRI AI. Enna venum kekkalam. Time, Calculation, Live News, Image, File Upload - Ellam pannuven!</div>
+</div>
+<div class="quick">
+<button onclick="quickAsk('What is the time now?')">Time</button>
+<button onclick="quickAsk('calc 100*345')">Calc</button>
+<button onclick="quickAsk('search today gold price in Sri Lanka')">Live News</button>
+<button onclick="quickAsk('generate image of a cute cat')">Image</button>
+<button onclick="quickAsk('Who is 【entity-Sachin Tendulkar¦canonical_name=Sachin Tendulkar】?')">Sachin</button>
+</div>
+<div class="input-area">
+<input type="file" id="fileInput" style="display:none" onchange="uploadFile()">
+<button class="upload-btn" onclick="document.getElementById('fileInput').click()">Attach</button>
+<input type="text" id="userInput" placeholder="Ask anything...">
+<button class="send-btn" onclick="ask()">Send</button>
+</div>
+</div>
+<script>
+var API = "http://127.0.0.1:8000";
+function cleanText(t){return t.replace(/\*\*/g,"").replace(/###/g,"").replace(/##/g,"").replace(/#/g,"");}
+function addMsg(text, type, imageUrl){
+  var box = document.getElementById("chatBox");
+  var div = document.createElement("div");
+  div.className = "msg " + type;
+  div.textContent = cleanText(text);
+  if(imageUrl){
+    var img = document.createElement("img");
+    img.src = imageUrl;
+    div.appendChild(document.createElement("br"));
+    div.appendChild(img);
+  }
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+async function ask(){
+  var input = document.getElementById("userInput");
+  var q = input.value.trim();
+  if(!q) return;
+  addMsg(q, "user");
+  input.value = "";
+  addMsg("Thinking...", "ai");
+  try{
+    var res = await fetch(API + "/agent?question=" + encodeURIComponent(q));
+    var data = await res.json();
+    var allMsgs = document.querySelectorAll(".msg.ai");
+    for(var i=0;i<allMsgs.length;i++){ if(allMsgs[i].textContent.includes("Thinking")) allMsgs[i].remove(); }
+    var ans = data.answer || "No answer";
+    if(ans.indexOf("IMAGE::") === 0){
+      var parts = ans.split("::");
+      addMsg(parts[2], "ai", data.image);
+    } else {
+      addMsg(ans, "ai", data.image);
+    }
+    loadHistory();
+  }catch(e){ addMsg("Server off-la irukku Bro! uvicorn run pannu.", "ai"); }
+}
+function quickAsk(q){ document.getElementById("userInput").value = q; ask(); }
+function newChat(){ fetch(API + "/clear"); document.getElementById("chatBox").innerHTML = '<div class="msg ai">New Chat Started Bro! Enna kekka pora?</div>'; loadHistory(); }
+async function loadHistory(){
+  try{
+    var res = await fetch(API + "/history");
+    var data = await res.json();
+    var list = document.getElementById("historyList");
+    list.innerHTML = "";
+    var hist = data.history.slice(-10).reverse();
+    for(var i=0;i<hist.length;i++){
+      if(hist[i].role === "user"){
+        var d = document.createElement("div");
+        d.className = "history-item";
+        d.textContent = hist[i].content;
+        d.onclick = (function(txt){ return function(){ document.getElementById("userInput").value = txt; ask(); }; })(hist[i].content);
+        list.appendChild(d);
+      }
+    }
+  }catch(e){}
+}
+async function uploadFile(){
+  var f = document.getElementById("fileInput").files[0];
+  if(!f) return;
+  addMsg("Uploaded: " + f.name, "user");
+  var form = new FormData();
+  form.append("file", f);
+  addMsg("File padikkiren...", "ai");
+  var res = await fetch(API + "/upload", {method:"POST", body:form});
+  var data = await res.json();
+  var allMsgs = document.querySelectorAll(".msg.ai");
+  for(var i=0;i<allMsgs.length;i++){ if(allMsgs[i].textContent.includes("padikkiren")) allMsgs[i].remove(); }
+  addMsg(data.answer, "ai");
+  loadHistory();
+}
+document.getElementById("userInput").addEventListener("keydown", function(e){ if(e.key==="Enter") ask(); });
+loadHistory();
+</script>
+</body>
+</html>
