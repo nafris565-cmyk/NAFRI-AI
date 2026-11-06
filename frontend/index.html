@@ -7,43 +7,40 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans','Segoe UI',sans-serif}
-body{background:radial-gradient(1000px 600px at 10% 0%, #1a0b2e 0%, transparent 50%),radial-gradient(900px 500px at 90% 100%, #0b2e2a 0%, transparent 50%),linear-gradient(135deg,#0b0b1e 0%,#12112b 45%,#0a0a1a 100%);color:#fff;display:flex;height:100vh;overflow:hidden}
-.sidebar{width:270px;background:rgba(255,255,255,0.04);backdrop-filter:blur(20px);padding:24px 18px;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.08)}
-.logo{font-size:26px;font-weight:800;letter-spacing:-0.5px}
+body{background:linear-gradient(135deg,#0b0b1e 0%,#12112b 45%,#0a0a1a 100%);color:#fff;display:flex;height:100vh;overflow:hidden}
+.sidebar{width:270px;background:rgba(255,255,255,0.04);padding:24px 18px;display:flex;flex-direction:column;border-right:1px solid rgba(255,255,255,0.08)}
+.logo{font-size:26px;font-weight:800}
 .logo span{background:linear-gradient(90deg,#00ff88,#00c6ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sidebar p{font-size:11px;letter-spacing:2px;color:#9aa0b5;margin:6px 0 22px;font-weight:600}
-.new-btn{background:linear-gradient(90deg,#00ff88,#00c6ff);color:#02150b;border:none;padding:13px;border-radius:14px;font-weight:700;cursor:pointer;margin-bottom:18px;font-size:14px;box-shadow:0 8px 25px rgba(0,255,136,0.25)}
-.new-btn:hover{transform:translateY(-1px)}
+.new-btn{background:linear-gradient(90deg,#00ff88,#00c6ff);color:#02150b;border:none;padding:13px;border-radius:14px;font-weight:700;cursor:pointer;margin-bottom:18px;font-size:14px}
 .hist-title{font-size:11px;color:#8b90a5;letter-spacing:1.5px;margin-bottom:10px;font-weight:600}
-.history-item{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.06);padding:11px 12px;border-radius:12px;margin-bottom:8px;font-size:13px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.history-item:hover{background:rgba(255,255,255,0.10)}
+.history-item{background:rgba(255,255,255,0.06);padding:11px 12px;border-radius:12px;margin-bottom:8px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .main{flex:1;display:flex;flex-direction:column;min-width:0}
-.header{padding:16px 28px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,0.02)}
-.header b{font-size:16px}
-.header small{color:#9aa0b5}
-.badge{background:linear-gradient(90deg,#00ff88,#00c6ff);color:#000;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:0.5px}
+.header{padding:16px 28px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;justify-content:space-between;align-items:center}
+.badge{background:linear-gradient(90deg,#00ff88,#00c6ff);color:#000;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800}
 .hero{text-align:center;padding:28px 20px 6px}
-.hero h1{font-size:34px;line-height:1.1;letter-spacing:-1px;font-weight:800}
+.hero h1{font-size:34px;line-height:1.1;font-weight:800}
 .hero h1 span{background:linear-gradient(90deg,#00ff88,#00c6ff,#a78bfa);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero p{color:#aab0c3;margin-top:8px;font-size:14px}
 .chat{flex:1;overflow-y:auto;padding:22px 28px;display:flex;flex-direction:column;gap:14px}
 .empty{text-align:center;color:#8b90a5;margin:auto;font-size:14px;line-height:1.7}
 .empty b{color:#fff;font-size:18px}
-.msg{max-width:78%;padding:14px 18px;border-radius:20px;line-height:1.65;font-size:15px;white-space:pre-wrap;box-shadow:0 8px 30px rgba(0,0,0,0.25)}
-.user{align-self:flex-end;background:linear-gradient(135deg,#00ff88,#00c6ff);color:#02150b;border-bottom-right-radius:6px;font-weight:500}
-.ai{align-self:flex-start;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.10);backdrop-filter:blur(10px);border-bottom-left-radius:6px}
+.msg{max-width:78%;padding:14px 18px;border-radius:20px;line-height:1.65;font-size:15px;white-space:pre-wrap}
+.user{align-self:flex-end;background:linear-gradient(135deg,#00ff88,#00c6ff);color:#02150b;border-bottom-right-radius:6px}
+.ai{align-self:flex-start;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.10);border-bottom-left-radius:6px}
 .ai img{max-width:100%;border-radius:14px;margin-top:10px}
 .quick{display:flex;gap:8px;padding:0 28px 12px;flex-wrap:wrap;justify-content:center}
 .quick button{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.10);color:#e6e8f0;padding:9px 14px;border-radius:20px;cursor:pointer;font-size:13px}
-.quick button:hover{border-color:#00ff88;background:rgba(0,255,136,0.10)}
 .input-wrap{padding:0 28px 22px}
-.input-bar{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:30px;backdrop-filter:blur(15px);box-shadow:0 15px 40px rgba(0,0,0,0.35)}
+.input-bar{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);padding:8px;border-radius:30px}
 .input-bar input{flex:1;background:transparent;border:none;color:#fff;padding:12px 10px;outline:none;font-size:15px;min-width:0}
 .input-bar input::placeholder{color:#8b90a5}
-.plus-btn{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.12);color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.plus-btn:hover{background:rgba(255,255,255,0.18)}
+.plus-btn{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.12);color:#fff;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mic-btn{background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.12);color:#fff;width:52px;height:42px;border-radius:20px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+.mic-btn.listening{background:#ff3b3b;border-color:#ff3b3b}
 .send-btn{background:linear-gradient(90deg,#00ff88,#00c6ff);border:none;width:42px;height:42px;border-radius:50%;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#02150b;font-weight:800}
 .hint{text-align:center;color:#7e8396;font-size:11px;margin-top:10px}
+.speak-btn{background:rgba(255,255,255,0.12);border:none;color:#fff;padding:5px 10px;border-radius:12px;cursor:pointer;font-size:12px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -58,7 +55,7 @@ body{background:radial-gradient(1000px 600px at 10% 0%, #1a0b2e 0%, transparent 
 <div class="header"><div><b>NAFRI AI</b> <small>- Ask Anything</small></div><span class="badge">PREMIUM</span></div>
 <div class="hero" id="heroBox">
 <h1>What can I help<br><span>you with today?</span></h1>
-<p>Time • Calculation • Live Search • Image • File Upload</p>
+<p>Time • Calculation • Live Search • Image • File Upload • Voice</p>
 </div>
 <div class="chat" id="chatBox">
 <div class="empty" id="emptyBox"><b>Start a conversation</b><br>Ask anything below - NAFRI AI will do it.</div>
@@ -75,104 +72,173 @@ body{background:radial-gradient(1000px 600px at 10% 0%, #1a0b2e 0%, transparent 
 <input type="file" id="fileInput" style="display:none" onchange="uploadFile()">
 <button class="plus-btn" onclick="document.getElementById('fileInput').click()">+</button>
 <input type="text" id="userInput" placeholder="Ask anything...">
-<button class="send-btn" onclick="ask()">➤</button>
+<button class="mic-btn" id="micBtn" onclick="startVoice()">Mic</button>
+<button class="send-btn" onclick="ask()">Send</button>
 </div>
-<div class="hint">NAFRI AI can make mistakes. Check important info.</div>
+<div class="hint">Click Mic and speak. NAFRI AI can make mistakes. Check important info.</div>
 </div>
 </div>
 <script>
 var API = "http://127.0.0.1:8000";
-function cleanText(t){
-  var s = t.split("**").join("");
+function cleanText(t) {
+  var s = String(t);
+  s = s.split("**").join("");
   s = s.split("###").join("");
   s = s.split("##").join("");
   s = s.split("#").join("");
   return s;
 }
-function hideEmpty(){
+function hideEmpty() {
   var e = document.getElementById("emptyBox");
-  if(e) e.style.display = "none";
+  if (e) { e.style.display = "none"; }
   var h = document.getElementById("heroBox");
-  if(h) h.style.display = "none";
+  if (h) { h.style.display = "none"; }
 }
-function addMsg(text, type, imageUrl){
+function speakText(text) {
+  try {
+    window.speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(String(text).substring(0, 500));
+    u.lang = "en-US";
+    window.speechSynthesis.speak(u);
+  } catch (e) {}
+}
+function addMsg(text, type, imageUrl) {
   hideEmpty();
   var box = document.getElementById("chatBox");
   var div = document.createElement("div");
   div.className = "msg " + type;
   div.textContent = cleanText(text);
-  if(imageUrl){
+  if (type === "ai") {
+    var br1 = document.createElement("br");
+    div.appendChild(br1);
+    var sp = document.createElement("button");
+    sp.className = "speak-btn";
+    sp.textContent = "Speak";
+    sp.onclick = function() { speakText(text); };
+    div.appendChild(sp);
+  }
+  if (imageUrl) {
+    var br2 = document.createElement("br");
+    div.appendChild(br2);
     var img = document.createElement("img");
     img.src = imageUrl;
-    div.appendChild(document.createElement("br"));
     div.appendChild(img);
   }
   box.appendChild(div);
   box.scrollTop = box.scrollHeight;
 }
-async function ask(){
+function removeThinking() {
+  var allMsgs = document.querySelectorAll(".msg.ai");
+  for (var i = 0; i < allMsgs.length; i++) {
+    if (allMsgs[i].textContent.indexOf("Thinking") !== -1) {
+      allMsgs[i].remove();
+    }
+  }
+}
+async function ask() {
   var input = document.getElementById("userInput");
   var q = input.value.trim();
-  if(!q) return;
+  if (!q) { return; }
   addMsg(q, "user");
   input.value = "";
   addMsg("Thinking...", "ai");
-  try{
+  try {
     var res = await fetch(API + "/agent?question=" + encodeURIComponent(q));
     var data = await res.json();
-    var allMsgs = document.querySelectorAll(".msg.ai");
-    for(var i=0;i<allMsgs.length;i++){ if(allMsgs[i].textContent.includes("Thinking")) allMsgs[i].remove(); }
-    var ans = data.answer || "No answer";
-    if(ans.indexOf("IMAGE::") === 0){
+    removeThinking();
+    var ans = "";
+    if (typeof data.answer === "object" && data.answer !== null) {
+      ans = JSON.stringify(data.answer);
+    } else {
+      ans = String(data.answer || "No answer");
+    }
+    if (ans.indexOf("IMAGE::") === 0) {
       var parts = ans.split("::");
       addMsg(parts[2], "ai", data.image);
     } else {
       addMsg(ans, "ai", data.image);
+      speakText(ans);
     }
     loadHistory();
-  }catch(e){ addMsg("Server off-la irukku Bro! uvicorn run pannu.", "ai"); }
+  } catch (e) {
+    removeThinking();
+    addMsg("Server is off. Please run uvicorn backend.main:app --reload", "ai");
+  }
 }
-function quickAsk(q){ document.getElementById("userInput").value = q; ask(); }
-function newChat(){
+function quickAsk(q) {
+  document.getElementById("userInput").value = q;
+  ask();
+}
+function newChat() {
   fetch(API + "/clear");
-  document.getElementById("chatBox").innerHTML = '<div class="empty" id="emptyBox"><b>Start a conversation</b><br>Ask anything below - NAFRI AI will do it.</div>';
+  var box = document.getElementById("chatBox");
+  box.innerHTML = "";
+  var div = document.createElement("div");
+  div.className = "empty";
+  div.id = "emptyBox";
+  div.innerHTML = "<b>Start a conversation</b><br>Ask anything below - NAFRI AI will do it.";
+  box.appendChild(div);
   var h = document.getElementById("heroBox");
-  if(h) h.style.display = "block";
+  if (h) { h.style.display = "block"; }
   loadHistory();
 }
-async function loadHistory(){
-  try{
+function startVoice() {
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { alert("Voice not supported in this browser. Use Chrome."); return; }
+  var rec = new SR();
+  rec.lang = "en-US";
+  var btn = document.getElementById("micBtn");
+  btn.classList.add("listening");
+  btn.textContent = "Listening...";
+  rec.onresult = function(e) {
+    var txt = e.results[0][0].transcript;
+    document.getElementById("userInput").value = txt;
+    btn.classList.remove("listening");
+    btn.textContent = "Mic";
+    ask();
+  };
+  rec.onerror = function() { btn.classList.remove("listening"); btn.textContent = "Mic"; };
+  rec.onend = function() { btn.classList.remove("listening"); btn.textContent = "Mic"; };
+  rec.start();
+}
+async function loadHistory() {
+  try {
     var res = await fetch(API + "/history");
     var data = await res.json();
     var list = document.getElementById("historyList");
     list.innerHTML = "";
     var hist = data.history.slice(-10).reverse();
-    for(var i=0;i<hist.length;i++){
-      if(hist[i].role === "user"){
+    for (var i = 0; i < hist.length; i++) {
+      if (hist[i].role === "user") {
         var d = document.createElement("div");
         d.className = "history-item";
         d.textContent = hist[i].content;
-        d.onclick = (function(txt){ return function(){ document.getElementById("userInput").value = txt; ask(); }; })(hist[i].content);
         list.appendChild(d);
       }
     }
-  }catch(e){}
+  } catch (e) {}
 }
-async function uploadFile(){
+async function uploadFile() {
   var f = document.getElementById("fileInput").files[0];
-  if(!f) return;
+  if (!f) { return; }
   addMsg("Uploaded: " + f.name, "user");
   var form = new FormData();
   form.append("file", f);
-  addMsg("File padikkiren...", "ai");
-  var res = await fetch(API + "/upload", {method:"POST", body:form});
-  var data = await res.json();
-  var allMsgs = document.querySelectorAll(".msg.ai");
-  for(var i=0;i<allMsgs.length;i++){ if(allMsgs[i].textContent.includes("padikkiren")) allMsgs[i].remove(); }
-  addMsg(data.answer, "ai");
-  loadHistory();
+  addMsg("Reading file...", "ai");
+  try {
+    var res = await fetch(API + "/upload", {method: "POST", body: form});
+    var data = await res.json();
+    var allMsgs = document.querySelectorAll(".msg.ai");
+    for (var i = 0; i < allMsgs.length; i++) {
+      if (allMsgs[i].textContent.indexOf("Reading file") !== -1) { allMsgs[i].remove(); }
+    }
+    addMsg(data.answer, "ai");
+    loadHistory();
+  } catch (e) {
+    addMsg("Upload failed. Server is off.", "ai");
+  }
 }
-document.getElementById("userInput").addEventListener("keydown", function(e){ if(e.key==="Enter") ask(); });
+document.getElementById("userInput").addEventListener("keydown", function(e) { if (e.key === "Enter") { ask(); } });
 loadHistory();
 </script>
 </body>

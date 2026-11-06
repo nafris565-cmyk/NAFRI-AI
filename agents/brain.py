@@ -1,34 +1,37 @@
-import os
-from dotenv import load_dotenv
 from google import genai
+import os
+import time
+from dotenv import load_dotenv
+from agents.memory import get_context
 
 load_dotenv()
 
-api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
+API_KEY = os.getenv("GEMINI_API_KEY")
+client = genai.Client(api_key=API_KEY)
 
-client = genai.Client(api_key=api_key) if api_key else None
-
-MODELS = ["gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-3-flash"]
-
-from agents.memory import get_context
+MODELS = [
+    "gemini-3.5-flash-lite",
+    "gemini-3-flash",
+    "gemini-2.5-flash",
+    "gemini-2.0-flash",
+    "gemini-1.5-flash"
+]
 
 def ask_brain(question):
     context = get_context()
-    full_prompt = f"""You are NAFRI AI, a helpful Premium AI Assistant.
-Previous Conversation:
-{context}
-
-User new question: {question}
-Answer in simple, clear English. Keep it clean without ** or ### symbols."""
+    full_prompt = f"Previous: {context}\nUser: {question}\nAnswer in simple, clear English. Keep short and clean without ** or ### symbols."
 
     for model_name in MODELS:
         try:
+            print(f"Trying model: {model_name}")
             response = client.models.generate_content(
                 model=model_name,
                 contents=full_prompt
             )
-            return response.text
+            if response.text:
+                return response.text
         except Exception as e:
             print(f"Model {model_name} failed: {e}")
+            time.sleep(1)
             continue
-    return "Sorry Bro, Brain is busy now. Try again."
+    return "Google Server is busy now (503). Please wait 30 seconds and try again."

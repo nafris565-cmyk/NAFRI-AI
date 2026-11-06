@@ -21,7 +21,6 @@ def save_message(role, content):
         "content": content,
         "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     })
-    # Last 50 messages mattum vechippom, file perusa pogama
     history = history[-50:]
     os.makedirs("memory", exist_ok=True)
     with open(HISTORY_FILE, "w", encoding="utf-8") as f:
@@ -30,8 +29,7 @@ def save_message(role, content):
 
 def get_context():
     history = load_history()
-    # Last 10 messages-ai Brain-kku anuppuvom
-    last_messages = history[-10:]
+    last_messages = history[-5:]
     context = ""
     for msg in last_messages:
         context += f"{msg['role']}: {msg['content']}\n"
