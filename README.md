@@ -22,4 +22,4 @@ Python, FastAPI, Gemini AI, HTML, CSS, JavaScript
 
 ## Link
 【entity-GitHub¦canonical_name=GitHub】: https://github.com/nafri5565-cmyk/NAFRI-AI
-Built by Nafri
+Built by JM.Nafris
